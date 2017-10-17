@@ -67,6 +67,7 @@ module.exports = function(RED) {
     function PubSubToMqtt(subscription, topic, message) {
         const path = subscription.id.split("/");
         return {
+            binary: message.data,
             payload: message.data,
             time: Date.parse(message.timestamp),
             project: path[path.length - 3],
