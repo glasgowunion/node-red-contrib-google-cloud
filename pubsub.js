@@ -66,8 +66,8 @@ module.exports = function(RED) {
      */
     function PubSubToMqtt(subscription,binary, topic, message) {
         const path = subscription.id.split("/");
-        var msg;
-        if binary === "inary" {
+        var msg = "";
+        if binary === "binary" {
             msg = new Buffer(message.data);
         }
         if binary === "string" {
