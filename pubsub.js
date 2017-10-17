@@ -64,11 +64,17 @@ module.exports = function(RED) {
     /**
      * Attempt to translate PubSub messages to MQTT-like.
      */
-    function PubSubToMqtt(subscription, topic, message) {
+    function PubSubToMqtt(subscription,binary, topic, message) {
         const path = subscription.id.split("/");
+        var msg;
+        if binary === "inary" {
+            msg = new Buffer(message.data);
+        }
+        if binary === "string" {
+            msg = message.data;
+        }
         return {
-            binary: new Buffer(message.data),
-            payload: message.data,
+            payload: msg,
             time: Date.parse(message.timestamp),
             project: path[path.length - 3],
             topic: topic,
@@ -95,7 +101,7 @@ module.exports = function(RED) {
         function OnMessage(message) {
             if (message == null)
                 return;
-            node.send(PubSubToMqtt(state.subscription, config.topic, message));
+            node.send(PubSubToMqtt(state.subscription, config.binary,config.topic, message));
             message.ack();
         }
 
@@ -156,6 +162,9 @@ module.exports = function(RED) {
                 }
                 if (config.encoding) {
                     options.encoding = config.encoding;
+                }
+                if (config.binary) {
+                    options.binary = config.binary;
                 }
                 if (config.interval) {
                     options.interval = config.interval;
