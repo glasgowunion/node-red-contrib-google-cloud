@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Node-RED nodes for Google Cloud Platform",
     "dependencies": {
-        "@google-cloud/pubsub": "latest"
+        "@google-cloud/pubsub": "0.8.0"
     },
     "keywords": [
         "google",
