@@ -163,9 +163,6 @@ module.exports = function(RED) {
                 if (config.encoding) {
                     options.encoding = config.encoding;
                 }
-                if (config.binary) {
-                    options.binary = config.binary;
-                }
                 if (config.interval) {
                     options.interval = config.interval;
                 }
